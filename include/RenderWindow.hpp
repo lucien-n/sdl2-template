@@ -4,13 +4,17 @@
 #include <SDL2/SDL_image.h>
 
 #include "Sprite.hpp"
+#include "Camera.hpp"
 
 class RenderWindow
 {
 public:
-    RenderWindow(const char *title, int width, int height, float renderScale);
+    RenderWindow(const char *title, int width, int height, float renderScale, Camera *camera);
     float renderScale;
+    SDL_Window *getWindow();
     SDL_Texture *loadTexture(const char *filePath);
+    void setCamera(Camera *camera);
+
     void destroy();
     void clear();
     void render(Sprite &sprite);
@@ -19,4 +23,5 @@ public:
 private:
     SDL_Window *window;
     SDL_Renderer *renderer;
+    Camera *camera;
 };

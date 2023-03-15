@@ -1,7 +1,6 @@
-#pragma once
-
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+
+#include <iostream>
 
 #include "Sprite.hpp"
 
@@ -12,7 +11,7 @@ Sprite::Sprite(float x, float y, SDL_Texture *texture) : x(x), y(y), texture(tex
     int width, height;
     SDL_QueryTexture(texture, NULL, NULL, &width, &height);
     rect.w = width;
-    rect.w = height;
+    rect.h = height;
 }
 
 float Sprite::getX()

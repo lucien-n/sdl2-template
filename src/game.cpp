@@ -1,13 +1,12 @@
-#pragma once
-
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 
 #include "Game.hpp"
 #include "RenderWindow.hpp"
 
 int Game::run()
 {
+    window.setCamera(&camera);
+
     while (running)
     {
         event_handler();
@@ -28,19 +27,24 @@ int Game::event_handler()
     {
         if (event.type == SDL_QUIT)
             running = false;
+        if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+            player.event_handler(event.key.keysym.sym, event.type);
     }
 }
 
 int Game::update()
 {
-    // update
+    player.update();
+    camera.update();
 }
 
 int Game::draw()
 {
     window.clear();
 
-    // draw
+    window.render(grassSprite);
+
+    window.render(player);
 
     window.display();
 }

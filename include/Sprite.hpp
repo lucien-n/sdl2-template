@@ -7,6 +7,7 @@ class Sprite
 {
 public:
     Sprite(float x, float y, SDL_Texture *texture);
+
     float getX();
     float getY();
     void setX(float x);
