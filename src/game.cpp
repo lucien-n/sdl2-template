@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 
+#include <time.h>
+
 #include "Game.hpp"
 #include "RenderWindow.hpp"
 
@@ -34,7 +36,13 @@ int Game::event_handler()
 
 int Game::update()
 {
-    player.update();
+    // update delta time
+    LAST = NOW;
+    NOW = SDL_GetPerformanceCounter();
+    deltaTime = (double)((NOW - LAST) / (double)SDL_GetPerformanceFrequency());
+
+    // update game components
+    player.update(deltaTime);
     camera.update();
 }
 

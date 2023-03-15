@@ -20,13 +20,17 @@ public:
     bool running = true;
     RenderWindow window = RenderWindow("SDL2 Template", WIDTH, HEIGHT, RENDERSCALE, NULL);
 
+    Uint64 NOW = SDL_GetPerformanceCounter();
+    Uint64 LAST = 0;
+    double deltaTime = 0;
+
     SDL_Texture *playerTexture = window.loadTexture("assets/player.png");
 
     Sprite grassSprite = Sprite(50, 50, window.loadTexture("assets/lush_grass.png"));
 
     Player player = Player(200, 200, playerTexture);
 
-    Camera camera = Camera(window.getWindow(), &player);
+    Camera camera = Camera(window.getWindow(), &player, RENDERSCALE);
 
     int run();
     int event_handler();

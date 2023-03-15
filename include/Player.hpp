@@ -11,7 +11,7 @@ public:
     using Entity::Entity;
 
     void event_handler(SDL_Keycode key, Uint32 event_type);
-    void update();
+    void update(double delta);
 
     void setKey(int key, bool pressed);
     bool getKey(int key);
@@ -26,5 +26,5 @@ private:
         {2, false},
         {3, false},
     };
-    float speed = 1.0;
+    float speed = 300.0;
 };

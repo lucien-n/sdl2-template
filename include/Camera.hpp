@@ -7,7 +7,8 @@
 class Camera
 {
 public:
-    Camera(SDL_Window *window, Sprite *followed);
+    Camera(SDL_Window *window, Sprite *followed, float renderScale);
+    float renderScale;
 
     void update();
 

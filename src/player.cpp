@@ -27,16 +27,17 @@ void Player::event_handler(SDL_Keycode key, Uint32 event_type)
     }
 }
 
-void Player::update()
+void Player::update(double delta)
 {
+    double deltaSpeed = speed * delta;
     if (getKey(0))
-        move(-getSpeed(), 0);
+        move(-deltaSpeed, 0);
     if (getKey(1))
-        move(getSpeed(), 0);
+        move(deltaSpeed, 0);
     if (getKey(2))
-        move(0, -getSpeed());
+        move(0, -deltaSpeed);
     if (getKey(3))
-        move(0, getSpeed());
+        move(0, deltaSpeed);
 }
 
 void Player::setKey(int key, bool pressed)
