@@ -1,10 +1,8 @@
 #include <SDL2/SDL.h>
 
-#include <iostream>
-
 #include "Sprite.hpp"
 
-Sprite::Sprite(float x, float y, SDL_Texture *texture) : x(x), y(y), texture(texture)
+Sprite::Sprite(float px, float py, SDL_Texture *ptexture) : x(px), y(py), texture(ptexture)
 {
     rect.x = 0;
     rect.y = 0;

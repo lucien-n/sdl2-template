@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -9,9 +7,9 @@
 int main(int argc, char *argv[])
 {
     if (SDL_Init(SDL_INIT_VIDEO) > 0)
-        std::cout << "SDL Video init failed. SDL Error: " << SDL_GetError() << std::endl;
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL_Init()", SDL_GetError(), 0);
     if (!IMG_Init(IMG_INIT_PNG))
-        std::cout << "SDL Image init failed. SDL Error: " << SDL_GetError() << std::endl;
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "IMG_Init()", SDL_GetError(), 0);
 
     Game game = Game();
 

@@ -26,5 +26,5 @@ private:
         {2, false},
         {3, false},
     };
-    float speed = 300.0;
+    float speed;
 };

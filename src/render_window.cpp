@@ -1,27 +1,30 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include <iostream>
-
 #include "RenderWindow.hpp"
 #include "Sprite.hpp"
 #include "Camera.hpp"
 
-RenderWindow::RenderWindow(const char *title, int width, int height, float renderScale_, Camera *camera) : window(NULL), renderer(NULL), camera(NULL)
+RenderWindow::RenderWindow(const char *p_title, int p_width, int p_height, float p_renderScale) : window(NULL), renderer(NULL), camera(NULL)
 {
-    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, p_width, p_height, SDL_WINDOW_SHOWN);
 
     if (window == NULL)
-        std::cout << "Window init failed. SDL Error: " << SDL_GetError() << std::endl;
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Window init failed", SDL_GetError(), 0);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    renderScale = renderScale_;
+    renderScale = p_renderScale;
 }
 
 SDL_Window *RenderWindow::getWindow()
 {
     return window;
+}
+
+SDL_Renderer *RenderWindow::getRenderer()
+{
+    return renderer;
 }
 
 SDL_Texture *RenderWindow::loadTexture(const char *filePath)
@@ -30,7 +33,7 @@ SDL_Texture *RenderWindow::loadTexture(const char *filePath)
     texture = IMG_LoadTexture(renderer, filePath);
 
     if (texture == NULL)
-        std::cout << "Texture load failed. SDL Error: " << SDL_GetError() << std::endl;
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Texture load failed", SDL_GetError(), 0);
 
     return texture;
 }

@@ -5,9 +5,10 @@
 #include "Game.hpp"
 #include "RenderWindow.hpp"
 
-int Game::run()
+void Game::run()
 {
     window.setCamera(&camera);
+    player.setSpeed(300);
 
     while (running)
     {
@@ -18,11 +19,9 @@ int Game::run()
 
     window.destroy();
     SDL_Quit();
-
-    return 0;
 }
 
-int Game::event_handler()
+void Game::event_handler()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -34,7 +33,7 @@ int Game::event_handler()
     }
 }
 
-int Game::update()
+void Game::update()
 {
     // update delta time
     LAST = NOW;
@@ -46,13 +45,15 @@ int Game::update()
     camera.update();
 }
 
-int Game::draw()
+void Game::draw()
 {
     window.clear();
 
     window.render(grassSprite);
 
     window.render(player);
+
+    hud.render(deltaTime);
 
     window.display();
 }

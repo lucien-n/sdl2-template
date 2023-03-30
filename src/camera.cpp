@@ -1,14 +1,12 @@
 #include <SDL2/SDL.h>
 
-#include <iostream>
-
 #include "Camera.hpp"
 #include "Sprite.hpp"
 
-Camera::Camera(SDL_Window *window, Sprite *followed, float renderScale_) : window(window), followed(followed)
+Camera::Camera(SDL_Window *p_window, Sprite *p_followed, float p_renderScale) : window(p_window), followed(p_followed)
 {
     SDL_GetWindowSize(window, windowWidth, windowHeight);
-    renderScale = renderScale_;
+    renderScale = p_renderScale;
 }
 
 void Camera::update()
@@ -20,9 +18,9 @@ void Camera::update()
         scrollY += followed->getY() * renderScale - (scrollY + 720 / 2);
 }
 
-void Camera::follow(Sprite *newFollowed)
+void Camera::follow(Sprite *p_followed)
 {
-    followed = newFollowed;
+    followed = p_followed;
 }
 
 float Camera::getScrollX()

@@ -1,13 +1,11 @@
-#include <iostream>
-
 #include <SDL2/SDL.h>
 
 #include "Player.hpp"
 
-void Player::event_handler(SDL_Keycode key, Uint32 event_type)
+void Player::event_handler(SDL_Keycode p_key, Uint32 p_event_type)
 {
-    bool pressed = event_type == SDL_KEYDOWN;
-    switch (key)
+    bool pressed = p_event_type == SDL_KEYDOWN;
+    switch (p_key)
     {
     case SDLK_q:
         setKey(0, pressed);
@@ -27,9 +25,9 @@ void Player::event_handler(SDL_Keycode key, Uint32 event_type)
     }
 }
 
-void Player::update(double delta)
+void Player::update(double p_delta)
 {
-    double deltaSpeed = speed * delta;
+    double deltaSpeed = speed * p_delta;
     if (getKey(0))
         move(-deltaSpeed, 0);
     if (getKey(1))
@@ -40,14 +38,14 @@ void Player::update(double delta)
         move(0, deltaSpeed);
 }
 
-void Player::setKey(int key, bool pressed)
+void Player::setKey(int p_key, bool p_pressed)
 {
-    keys[key] = pressed;
+    keys[p_key] = p_pressed;
 }
 
-bool Player::getKey(int key)
+bool Player::getKey(int p_key)
 {
-    return keys[key];
+    return keys[p_key];
 }
 
 float Player::getSpeed()
@@ -55,7 +53,7 @@ float Player::getSpeed()
     return speed;
 }
 
-void Player::setSpeed(float speed_)
+void Player::setSpeed(float p_speed)
 {
-    speed = speed_;
+    speed = p_speed;
 }

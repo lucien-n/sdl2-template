@@ -7,8 +7,8 @@ void Entity::update()
 {
 }
 
-void Entity::move(float x, float y)
+void Entity::move(float p_x, float p_y)
 {
-    setX(getX() + x);
-    setY(getY() + y);
+    setX(getX() + p_x);
+    setY(getY() + p_y);
 }
