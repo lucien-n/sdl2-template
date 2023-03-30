@@ -1,9 +1,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "RenderWindow.hpp"
 #include "Sprite.hpp"
 #include "Camera.hpp"
+#include "Text.hpp"
 
 RenderWindow::RenderWindow(const char *p_title, int p_width, int p_height, float p_renderScale) : window(NULL), renderer(NULL), camera(NULL)
 {
@@ -45,7 +47,11 @@ void RenderWindow::setCamera(Camera *camera_)
 
 void RenderWindow::destroy()
 {
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 void RenderWindow::clear()
@@ -65,8 +71,8 @@ void RenderWindow::render(Sprite &sprite)
     SDL_Rect dest;
     if (camera != NULL)
     {
-        dest.x = sprite.getX() * renderScale - camera->getScrollX();
-        dest.y = sprite.getY() * renderScale - camera->getScrollY();
+        dest.x = (sprite.getX() * renderScale - camera->getScrollX()) - sprite.getRect().w / 2;
+        dest.y = (sprite.getY() * renderScale - camera->getScrollY()) - sprite.getRect().h / 2;
     }
     else
     {
@@ -77,4 +83,16 @@ void RenderWindow::render(Sprite &sprite)
     dest.h = sprite.getRect().h * renderScale;
 
     SDL_RenderCopy(renderer, sprite.getTexture(), &src, &dest);
+}
+
+void RenderWindow::render(Text &text, int x, int y)
+{
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+
+    dest.w *= renderScale * 2;
+    dest.h *= renderScale * 2;
+
+    SDL_RenderCopy(renderer, text.getTexture(), nullptr, &dest);
 }

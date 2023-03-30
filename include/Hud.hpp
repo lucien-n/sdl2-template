@@ -1,10 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-
-#if 0
-#include <SDL2/SDL_FontCache.h>
-#endif
+#include <SDL2/SDL_ttf.h>
 
 #include "RenderWindow.hpp"
 
@@ -13,11 +10,14 @@ class Hud
 public:
     Hud(RenderWindow *window, int fontSize);
 
+    TTF_Font *getFont();
+    void destroy();
     void render(float delta);
 
 private:
     RenderWindow *window;
-#if 0
-    FC_Font *font;
-#endif
+    TTF_Font *font;
+    SDL_Color font_color = {255, 255, 255, 255};
+    int font_size = 16;
+    std::string font_path = "assets/fonts/reemkufi.ttf";
 };

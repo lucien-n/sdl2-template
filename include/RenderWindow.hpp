@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "Sprite.hpp"
+#include "Text.hpp"
 #include "Camera.hpp"
 
 class RenderWindow
@@ -10,6 +11,7 @@ class RenderWindow
 public:
     RenderWindow(const char *title, int width, int height, float renderScale);
     float renderScale;
+
     SDL_Window *getWindow();
     SDL_Renderer *getRenderer();
 
@@ -19,6 +21,7 @@ public:
     void destroy();
     void clear();
     void render(Sprite &sprite);
+    void render(Text &text, int x, int y);
     void display();
 
 private:
