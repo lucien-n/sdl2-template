@@ -32,6 +32,7 @@ SDL_Texture *Text::loadFont(SDL_Renderer *renderer, const std::string &font_path
         SDL_Log("Failed to create text texture");
 
     SDL_FreeSurface(text_surface);
+    TTF_CloseFont(font);
 
     return text_texture;
 }

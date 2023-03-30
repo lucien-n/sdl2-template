@@ -95,4 +95,5 @@ void RenderWindow::render(Text &text, int x, int y)
     dest.h *= renderScale * 2;
 
     SDL_RenderCopy(renderer, text.getTexture(), nullptr, &dest);
+    SDL_DestroyTexture(text.getTexture());
 }
